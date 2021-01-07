@@ -53,7 +53,6 @@ const processNewUser = async (req, res) => {
 
 
 const processLogin = async (req, res) => {
-
     const {
         username,
         password
