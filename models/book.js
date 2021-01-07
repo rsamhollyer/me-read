@@ -17,7 +17,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Book.init({
-    AuthorId: DataTypes.INTEGER,
+    AuthorId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: "Author",
+        key: 'id',
+        as: 'AuthorId'
+      }
+    },
     title: DataTypes.STRING,
     copyright: DataTypes.INTEGER,
     totalpages: DataTypes.INTEGER,

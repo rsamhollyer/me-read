@@ -11,16 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Author.hasMany(models.Book , {
-        foreignKey:"AuthorId",
+      Author.hasMany(models.Book, {
+        foreignKey: "AuthorId",
       })
-      Author.belongsTo(models.User , {
-        foreignKey:'UserId'
+      Author.belongsTo(models.User, {
+        foreignKey: 'UserId'
       })
     }
   };
   Author.init({
-    UserId: DataTypes.INTEGER,
+    UserId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: "User",
+        key: 'id',
+        as: 'UserId'
+      }
+    },
     authorfirst: DataTypes.STRING,
     authorlast: DataTypes.STRING
   }, {
