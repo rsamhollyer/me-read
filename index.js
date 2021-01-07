@@ -18,7 +18,7 @@ const HOST = 'localhost';
 
 const logger = morgan('tiny');
 
-const {homeRouter, userRouter} = require("./routers")
+const {homeRouter, userRouter, authorRouter} = require("./routers")
 
 
 app.use(express.static("public"))
@@ -47,6 +47,7 @@ app.use(logger);
 
 app.use(homeRouter)
 app.use("/user",userRouter)
+app.use("/author", authorRouter)
 
 server.listen(PORT, HOST, () => {
     console.log(`Listening at http://${HOST}:${PORT}`);
