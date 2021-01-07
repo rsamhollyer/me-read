@@ -1,14 +1,14 @@
 const layout = {
     partials:{
-        header:"partials/header.html",
-        footer:"partials/footer.html", 
+        header:"partials/header",
+        footer:"partials/footer", 
         }
 }
 
 const navLayout = {
     partials:{
-        header:"partials/navheader.html",
-        footer:"partials/footer.html"
+        header:"partials/navheader",
+        footer:"partials/footer"
     }
 }
 
