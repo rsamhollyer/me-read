@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Book.belongsTo(models.Author, {
-        foreignKey:"AuthorId"
+        foreignKey: "AuthorId"
       })
     }
   };
