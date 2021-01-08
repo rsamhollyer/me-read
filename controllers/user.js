@@ -1,10 +1,14 @@
 const {
     layout,
-    navLayout
-} = require("../utils")
+    navLayout,
+    capitalize,
+} = require("../utilityfiles/utils")
+
 const bcrypt = require("bcryptjs");
+
 const {
-    User , Author
+    User,
+    Author
 } = require("../models");
 
 
@@ -58,6 +62,7 @@ const processLogin = async (req, res) => {
         password
     } = req.body;
 
+
     try {
         const user = await User.findOne({
             where: {
@@ -76,8 +81,8 @@ const processLogin = async (req, res) => {
                 req.session.user = {
                     username: user.username,
                     id: user.id,
-                    firstname:user.firstname,
-                    lastname:user.lastname
+                    firstname: capitalize(user.firstname),
+                    lastname: capitalize(user.lastname),
                 }
 
                 req.session.save(() => {
@@ -97,17 +102,41 @@ const processLogin = async (req, res) => {
 
 }
 
-const userHomePage = (req, res) => {
-    const {firstname,lastname} = req.session.user
-    
-    res.render("user/userhome", {
-        ...layout,
-        locals: {
-            title: `${firstname} ${lastname}'s Home Page`,
-            firstname,
-            lastname,
+const userHomePage = async (req, res) => {
+    let {
+        firstname,
+        lastname,
+        id
+    } = req.session.user
+
+    if (id) {
+        let authors = []
+        try {
+        
+            authors = await Author.findAll({
+                where: {
+                    UserId: id,
+                }
+            })
+        
+        
+        } catch (err) {
+            console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
         }
-    })
+
+        res.render("user/userhome", {
+            ...layout,
+            locals: {
+                title: `${firstname} ${lastname}'s Home Page`,
+                firstname,
+                lastname,
+                authors,
+            }
+        })
+    }
+
+
+    
 }
 
 const logout = (req, res) => {

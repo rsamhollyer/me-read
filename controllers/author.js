@@ -1,7 +1,7 @@
 const {
     layout,
     navLayout
-} = require("../utils")
+} = require("../utilityfiles/utils")
 
 const {
     Author

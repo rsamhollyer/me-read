@@ -1,4 +1,4 @@
-const {layout,navLayout} = require("../utils")
+const {layout,navLayout} = require("../utilityfiles/utils")
 
 const home =  (req, res) => {
     res.render("index", {
