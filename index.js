@@ -24,7 +24,8 @@ const logger = morgan('tiny');
 const {
     homeRouter,
     userRouter,
-    authorRouter
+    authorRouter,
+    bookRouter
 } = require("./routers")
 
 
@@ -53,9 +54,14 @@ app.use(logger);
 
 
 app.use(homeRouter)
+
 app.use("/user", userRouter)
+
 app.use(requireLogin)
+
 app.use("/author", authorRouter)
+
+app.use("/book", bookRouter)
 
 server.listen(PORT, HOST, () => {
     console.log(`Listening at http://${HOST}:${PORT}`);
