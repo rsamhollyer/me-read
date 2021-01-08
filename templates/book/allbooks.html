@@ -1,0 +1,6 @@
+${header}
+<a href="${author.id}/add">Add Book to Collection </a>
+<ul>    ${books.length > 0 ?  books.map(b=>`<li><a href="${b.id}"> ${b.title} </a></li>`).join("") : `No Books Yet!` }
+</ul>
+
+${footer}
