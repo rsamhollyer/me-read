@@ -24,12 +24,15 @@ const newUser = (req, res) => {
 
 const processNewUser = async (req, res) => {
 
-    const {
+    let {
         username,
         password,
         firstname,
         lastname
     } = req.body
+
+    firstname = firstname.toLowerCase()
+    lastname = lastname.toLowerCase()
 
     if (username === "" || password === "" || firstname === "") {
         res.redirect(`${req.baseUrl}/create`)
@@ -103,7 +106,7 @@ const processLogin = async (req, res) => {
 }
 
 const userHomePage = async (req, res) => {
-    let {
+    const {
         firstname,
         lastname,
         id
@@ -112,14 +115,14 @@ const userHomePage = async (req, res) => {
     if (id) {
         let authors = []
         try {
-        
+
             authors = await Author.findAll({
                 where: {
                     UserId: id,
                 }
             })
-        
-        
+
+
         } catch (err) {
             console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
         }
@@ -136,7 +139,7 @@ const userHomePage = async (req, res) => {
     }
 
 
-    
+
 }
 
 const logout = (req, res) => {
