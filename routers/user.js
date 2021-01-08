@@ -8,4 +8,5 @@ router
     .post("/create" , userControllers.processNewUser)
     .post("/login",userControllers.processLogin)
     .get("/home",userControllers.userHomePage)
+    .post("/logout",userControllers.logout)
 module.exports = router

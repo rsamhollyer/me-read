@@ -4,7 +4,7 @@ const {
 } = require("../utils")
 const bcrypt = require("bcryptjs");
 const {
-    User
+    User , Author
 } = require("../models");
 
 
@@ -110,9 +110,18 @@ const userHomePage = (req, res) => {
     })
 }
 
+const logout = (req, res) => {
+    console.log(`LOGOUT`);
+
+    req.session.destroy(() => {
+        res.redirect("/")
+    })
+}
+
 module.exports = {
     newUser,
     processNewUser,
     processLogin,
-    userHomePage
+    userHomePage,
+    logout
 }
