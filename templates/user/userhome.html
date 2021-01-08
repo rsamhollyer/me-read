@@ -2,7 +2,9 @@ ${header}
 <h1>${firstname} ${lastname}'s HOME PAGE</h1>
 
 <a href="/author/add"> Add an Author</a>
-
+<ul>
+${authors.length > 0 ? authors.map(auth=>`<li><a href="/book/${auth.id}">${auth.authorfirst} ${auth.authorlast}</a> </li>`).join("")  :`No Authors Yet!`  }
+</ul>
 <form method="POST" action="/user/logout">
 <input type="submit" value="Logout">
 

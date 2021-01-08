@@ -8,7 +8,10 @@ const es6Renderer = require('express-es6-template-engine');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
-const {layout} = require("./utils")
+const {
+    layout,
+    requireLogin
+} = require("./utilityfiles/utils")
 
 const app = express();
 const server = http.createServer(app);
@@ -18,7 +21,11 @@ const HOST = 'localhost';
 
 const logger = morgan('tiny');
 
-const {homeRouter, userRouter, authorRouter} = require("./routers")
+const {
+    homeRouter,
+    userRouter,
+    authorRouter
+} = require("./routers")
 
 
 app.use(express.static("public"))
@@ -46,7 +53,8 @@ app.use(logger);
 
 
 app.use(homeRouter)
-app.use("/user",userRouter)
+app.use("/user", userRouter)
+app.use(requireLogin)
 app.use("/author", authorRouter)
 
 server.listen(PORT, HOST, () => {
