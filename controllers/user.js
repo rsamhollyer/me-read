@@ -105,42 +105,27 @@ const processLogin = async (req, res) => {
 
 }
 
-const userHomePage = async (req, res) => {
+const userHomePage = (req, res) => {
     const {
         firstname,
-        lastname,
-        id
+        lastname
     } = req.session.user
 
-    if (id) {
-        let authors = []
-        try {
 
-            authors = await Author.findAll({
-                where: {
-                    UserId: id,
-                }
-            })
+    res.render("user/userhome", {
+        ...navLayout,
+        locals: {
+            title: `${firstname} ${lastname}'s Home Page`,
+            firstname,
+            lastname,
 
-
-        } catch (err) {
-            console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
         }
-
-        res.render("user/userhome", {
-            ...layout,
-            locals: {
-                title: `${firstname} ${lastname}'s Home Page`,
-                firstname,
-                lastname,
-                authors,
-            }
-        })
-    }
-
-
-
+    })
 }
+
+
+
+
 
 const logout = (req, res) => {
     console.log(`LOGOUT`);
