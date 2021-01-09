@@ -1,8 +1,62 @@
 ${header}
+<div class="container">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Launch static backdrop modal
+        </button>
+    </div>
 
-<a href="/author/add"> Add an Author</a>
-<ul>
-${authors.length > 0 ? authors.map(auth=>`<li><a href="/book/${auth.id}">${auth.authorfirst} ${auth.authorlast}</a> </li>`).join("")  :`No Authors Yet!`  }
-</ul>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <a href="/author/add"> Add an Author</a>
+
+    <div class="card-group">
+        ${authors.length > 0 ? authors.map(auth=>`<div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><a href="/book/${auth.id}">${auth.authorfirst} ${auth.authorlast}</a></h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This
+                    content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>`).join("") :`No Authors Yet!` }
+
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This card has even longer content than the first to show that equal height action.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div>
 ${footer}
