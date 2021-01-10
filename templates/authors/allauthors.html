@@ -1,11 +1,19 @@
 ${header}
 <div class="container">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Launch static backdrop modal
-        </button>
+
+    <div class="container mt-1 mb-1 border border-4 border-dark">
+        <div class="d-flex justify-content-between">
+            <h1>Me - Authors</h1>
+
+            <!-- Button trigger modal -->
+            <div class="button align-self-center">
+                <button type="button" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="fas fa-plus-circle">ADD</i>
+                </button>
+            </div>
+        </div>
     </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -13,50 +21,47 @@ ${header}
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Add a New Author</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form id="add-new-author" action="/author/add" method="POST">
+
+                        <label for="firstname"> First Name </label>
+                        <input autofocus required id="firstname" name="authorfirst" type="text">
+
+                        <label for="lastname"> Last Name </label>
+                        <input required id="lastname" name="authorlast" type="text">
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button id="add-new-author" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="/author/add"> Add an Author</a>
 
-    <div class="card-group">
-        ${authors.length > 0 ? authors.map(auth=>`<div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><a href="/book/${auth.id}">${auth.authorfirst} ${auth.authorlast}</a></h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This
-                    content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>`).join("") :`No Authors Yet!` }
-
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        ${authors.length > 0 ? authors.map(auth=>`
+        <div class="col shadow-lg p-3 mb-5 bg-light rounded">
+            <div class="card h-100">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/book/${auth.id}">${auth.authorfirst} ${auth.authorlast}</a>
+                        </h5>
+                        <p class="card-text"></p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
+        `).join("") :`No Authors Yet!` }
+
+
     </div>
 </div>
 ${footer}

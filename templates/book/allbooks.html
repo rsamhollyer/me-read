@@ -1,6 +1,85 @@
 ${header}
-<a href="${author.id}/add">Add Book to Collection </a>
-<ul>    ${books.length > 0 ?  books.map(b=>`<li><a href="${b.id}"> ${b.title} </a></li>`).join("") : `No Books Yet!` }
-</ul>
+
+<br>
+
+<div class="container">
+
+    <div class="container mt-1 mb-1 border border-4 border-dark">
+        <div class="d-flex justify-content-between">
+            <h1>Me - Books</h1>
+
+            <!-- Button trigger modal -->
+            <div class="button align-self-center">
+                <button type="button" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="fas fa-plus-circle">ADD</i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add a New Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-new-book" action="add" method="POST">
+
+
+                        <label for="title">Title</label>
+                        <input autofocus required id="title" type="text" name="title">
+
+                        <label for="copyright">Copyright Year</label>
+                        <input required id="copyright" type="text" name="copyright">
+
+                        <label for="totalpages">Total Pages in Book</label>
+                        <input required id="totalpages" type="text" name="totalpages">
+
+                        <label for="currentpage">What page are you on? (If you've finished, please enter the total page
+                            count!)</label>
+                        <input required id="currentpage" type="text" name="currentpage">
+
+                        <input name="hidden_author_id" type="hidden" data-hidden_author_id >
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="add-new-book" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        ${books.length > 0 ? books.map(b=>`
+        <div class="col shadow-lg p-3 mb-5 bg-light rounded">
+            <div class="card h-100">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> ${b.title}
+                        </h5>
+                        <p class="card-text"></p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `).join("") :`<h2>No Books Yet!</h2>` }
+
+    </div>
+</div>
+
+
+<script src="/scripts/grabbookurl.js"></script>
+
+
 
 ${footer}
