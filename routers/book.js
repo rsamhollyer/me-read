@@ -4,8 +4,7 @@ const router = express.Router()
 const { bookControllers } = require("../controllers")
 const { processBookForm } = require("../controllers/book")
 
-router.get("/:id",bookControllers.renderBooksPage)
-      .get("/:id/add",bookControllers.renderAddBookPage)  
-      .post("/:id/add",processBookForm) 
+router.get("/:authorid",bookControllers.renderBooksPage)
+      .post("/add",bookControllers.processBookForm) 
 
 module.exports = router

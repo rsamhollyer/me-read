@@ -10,22 +10,22 @@ const {
 
 const renderBooksPage = async (req, res) => {
     const {
-        id
+        authorid
     } = req.params
 
     try {
         let books = []
-        if (id) {
+        if (authorid) {
 
-            const author = await Author.findByPk(id)
+            const author = await Author.findByPk(authorid)
             books = await Book.findAll({
                 where: {
-                    AuthorId: id,
+                    AuthorId: authorid,
                 }
             })
 
             res.render("book/allbooks", {
-                ...layout,
+                ...navLayout,
                 locals: {
                     title: `${author.authorfirst} ${author.authorlast}`,
                     books,
@@ -40,15 +40,6 @@ const renderBooksPage = async (req, res) => {
     }
 }
 
-const renderAddBookPage = (req, res) => {
-    res.render("forms/addbook", {
-        ...layout,
-        locals: {
-            title: "Add a new Book"
-        }
-    })
-
-}
 
 const processBookForm = async (req, res) => {
 
@@ -56,27 +47,37 @@ const processBookForm = async (req, res) => {
         title,
         copyright,
         totalpages,
-        currentpage
+        currentpage,
+        hidden_author_id
     } = req.body
 
-    const {
-        id
-    } = req.params
-    const author = await Author.findByPk(id)
+
+
+    // const {
+    //     authorid
+    // } = req.params
+
+
+
+    const author = await Author.findByPk(hidden_author_id)
+    console.log(`==================first variables ${title} ${copyright} ${totalpages} ${currentpage}`);
+    console.log(`=====================ID ${hidden_author_id}`);
+    console.log(`=====================AUTHOR ${author}`);
+    console.log(`===================url ${req.url}`);
 
     try {
 
-        if (title && copyright && totalpages && currentpage && id) {
+        if (title && copyright && totalpages && currentpage &&  hidden_author_id) {
             const newBook = await Book.create({
                 title,
                 copyright,
                 totalpages,
                 currentpage,
-                AuthorId: id,
+                AuthorId:  hidden_author_id,
             })
             console.log(`NEW BOOK ADDED ====================== : ${newBook}`);
-            res.redirect(`${req.baseUrl}/${id}`)
-        } else{
+            res.redirect(`${req.baseUrl}/${ hidden_author_id}`)
+        } else {
             console.log(`ERROR IN ELSE===================`);
             res.redirect("/user/home")
         }
@@ -91,6 +92,5 @@ const processBookForm = async (req, res) => {
 
 module.exports = {
     renderBooksPage,
-    renderAddBookPage,
     processBookForm
 }
