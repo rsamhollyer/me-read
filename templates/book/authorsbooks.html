@@ -77,9 +77,8 @@ ${header}
                                     <li><span data-book-id="${b.id}" data-bs-toggle="modal" data-bs-target="#editForm"
                                             class="dropdown-item"><i class="fas fa-edit"></i>Edit</span></li>
 
-                                    <li><span data-book-id="${b.id}" data-bs-toggle="modal"
-                                            data-bs-target="#deleteCard" class="dropdown-item"><i
-                                                class="fas fa-trash-alt"></i> Delete</span></li>
+                                    <li><span data-book-id="${b.id}" data-bs-toggle="modal" data-bs-target="#deleteCard"
+                                            class="dropdown-item"><i class="fas fa-trash-alt"></i> Delete</span></li>
                                 </ul>
 
                             </div>
@@ -102,13 +101,23 @@ ${header}
 
                     <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
 
-                    <form id="edit-author" method="PUT">
+                    <form id="add-new-book" action="add" method="POST">
 
-                        <label for="firstname"> First Name </label>
-                        <input autofocus required id="firstname" name="authorfirst" type="text">
 
-                        <label for="lastname"> Last Name </label>
-                        <input required id="lastname" name="authorlast" type="text">
+                        <label for="title">Title</label>
+                        <input autofocus required id="title" type="text" name="title">
+
+                        <label for="copyright">Copyright Year</label>
+                        <input required id="copyright" type="text" name="copyright">
+
+                        <label for="totalpages">Total Pages in Book</label>
+                        <input required id="totalpages" type="text" name="totalpages">
+
+                        <label for="currentpage">What page are you on? (If you've finished, please enter the total page
+                            count!)</label>
+                        <input required id="currentpage" type="text" name="currentpage">
+
+                        <input name="hidden_author_id" type="hidden" data-hidden_author_id>
 
 
                         <button id="edit-author" type="button" class="btn-close" data-bs-dismiss="modal"
@@ -141,7 +150,7 @@ ${header}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button  data-bs-dismiss="modal" data-delete-book type="button"
+                    <button data-bs-dismiss="modal" data-delete-book type="button"
                         class="bg-danger btn btn-primary">Delete</button>
                 </div>
             </div>

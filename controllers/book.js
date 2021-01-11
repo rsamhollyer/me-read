@@ -53,7 +53,7 @@ const processBookForm = async (req, res) => {
 
     
 
-    const author = await Author.findByPk(hidden_author_id)
+    // const author = await Author.findByPk(hidden_author_id)
    
     try {
 
@@ -66,7 +66,7 @@ const processBookForm = async (req, res) => {
                 AuthorId:  hidden_author_id,
             })
             console.log(`NEW BOOK ADDED ====================== : ${newBook}`);
-            res.redirect(`${req.baseUrl}/${ hidden_author_id}`)
+            res.redirect(`${req.baseUrl}/${hidden_author_id}`)
         } else {
             console.log(`ERROR IN ELSE===================`);
             res.redirect("/user/home")
