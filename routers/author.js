@@ -8,6 +8,7 @@ const {
 router.get("/main", authorControllers.authorPage)
       .get("/add", authorControllers.renderAuthorForm)
       .post("/add", authorControllers.processNewAuthor)
+      .delete("/:authorid",authorControllers.deleteAuthor)
 
 
 module.exports = router

@@ -33,7 +33,7 @@ const authorPage = async (req, res) => {
         res.render("authors/allauthors", {
             ...navLayout,
             locals: {
-                title:`${firstname}'s Authors`,
+                title: `${firstname}'s Authors`,
                 authors,
             }
         })
@@ -80,10 +80,42 @@ const processNewAuthor = async (req, res) => {
 }
 
 
+const deleteAuthor = async (req, res) => {
 
+    const {
+        authorid
+    } = req.params
+
+    console.log(authorid);
+
+    try {
+
+        const numberOfAuthorToDelete = await Author.destroy({
+            where: {
+                id: authorid,
+                UserId: req.session.user.id
+            }
+        })
+
+        console.log(numberOfAuthorToDelete);
+
+        if (numberOfAuthorToDelete === 0 || numberOfAuthorToDelete > 1) {
+            throw Error(`Something has gone wrong`)
+        }
+        res.json({
+            status: `Success`,
+            authorid
+        })
+    } catch (err) {
+        res.json({
+            status: `Error`
+        })
+    }
+}
 
 module.exports = {
     renderAuthorForm,
     processNewAuthor,
     authorPage,
+    deleteAuthor
 }

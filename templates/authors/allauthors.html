@@ -54,9 +54,25 @@ ${header}
 
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-title"><a class="nonunderline" href="/book/${auth.id}">${auth.authorfirst} ${auth.authorlast}</a>
+                            <h5 class="card-title"><a class="nonunderline" href="/book/${auth.id}">${auth.authorfirst}
+                                    ${auth.authorlast}</a>
                             </h5>
-                            <i class="fas fa-ellipsis-v"></i>
+                            <div class="dropdown">
+                                <i type="button" class="fas fa-ellipsis-v" data-bs-toggle="dropdown"
+                                    aria-expanded="false"></i>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                    <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
+                                            data-bs-target="#editForm" class="dropdown-item"><i
+                                                class="fas fa-edit"></i>Edit</span></li>
+
+                                    <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
+                                            data-bs-target="#deleteCard" class="dropdown-item"><i
+                                                class="fas fa-trash-alt"></i> Delete</span></li>
+                                </ul>
+
+                            </div>
                         </div>
                         <div class="border-bottom border-dark"></div>
                         <p class="card-text"></p>
@@ -69,5 +85,48 @@ ${header}
 
 
     </div>
+    <!-- Modal for Edit -->
+    <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Delete -->
+    <div class="modal fade" id="deleteCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Author</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button data-bs-dismiss="modal" data-delete-author type="button" class="bg-danger btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
+
+<script src="/scripts/deleteauthors.js"></script>
 ${footer}
