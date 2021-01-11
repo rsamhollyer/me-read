@@ -91,16 +91,30 @@ ${header}
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+
                     <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <form id="edit-author" method="PUT">
+
+                        <label for="firstname"> First Name </label>
+                        <input autofocus required id="firstname" name="authorfirst" type="text">
+
+                        <label for="lastname"> Last Name </label>
+                        <input required id="lastname" name="authorlast" type="text">
+
+
+                        <button id="edit-author" type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button data-bs-dismiss="modal" type="submit" data-edit-author
+                        class="btn btn-primary">Understood</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -111,7 +125,7 @@ ${header}
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Delete Author</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Author?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -119,7 +133,8 @@ ${header}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button data-bs-dismiss="modal" data-delete-author type="button" class="bg-danger btn btn-primary">Delete</button>
+                    <button data-bs-dismiss="modal" data-delete-author type="button"
+                        class="bg-danger btn btn-primary">Delete</button>
                 </div>
             </div>
         </div>

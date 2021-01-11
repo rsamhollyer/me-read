@@ -1,6 +1,5 @@
 const authorIdVary = document.querySelectorAll("[data-author-id]")
 const deleteButton = document.querySelector("[data-delete-author]")
-
 let deleteRequest;
 
 const handleClick = (e) => {
@@ -15,7 +14,6 @@ const handleClick = (e) => {
             })
             .then(result => result.json())
             .then(data => {
-
 
                 location.reload(); 
             })

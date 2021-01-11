@@ -86,7 +86,6 @@ const deleteAuthor = async (req, res) => {
         authorid
     } = req.params
 
-    console.log(authorid);
 
     try {
 
@@ -113,9 +112,55 @@ const deleteAuthor = async (req, res) => {
     }
 }
 
+const editAuthor = async (req, res) => {
+
+    const {
+        authorid
+    } = req.params
+
+    const {
+        id
+    } = req.session.user
+
+    const {
+        authorfirst,
+        authorlast
+    } = req.body
+
+    try {
+
+        const numberOfAuthorToEdit = await Author.update({
+            authorfirst,
+            authorlast,
+            UserId: id,
+            
+            where: {
+                id: authorid,
+                UserId: id,
+            }
+
+        })
+
+        console.log(numberOfAuthorToEdit);
+
+        if (numberOfAuthorToEdit === 0 || numberOfAuthorToEdit > 1) {
+            throw Error(`Something has gone wrong`)
+        }
+        res.json({
+            status: `Success`,
+            authorid
+        })
+    } catch (err) {
+        res.json({
+            status: `Error`
+        })
+
+    }
+}
 module.exports = {
     renderAuthorForm,
     processNewAuthor,
     authorPage,
-    deleteAuthor
+    deleteAuthor,
+    editAuthor
 }

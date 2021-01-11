@@ -24,7 +24,7 @@ const renderBooksPage = async (req, res) => {
                 }
             })
 
-            res.render("book/allbooks", {
+            res.render("book/authorsbooks", {
                 ...navLayout,
                 locals: {
                     title: `${author.authorfirst} ${author.authorlast}`,
@@ -51,20 +51,10 @@ const processBookForm = async (req, res) => {
         hidden_author_id
     } = req.body
 
-
-
-    // const {
-    //     authorid
-    // } = req.params
-
-
+    
 
     const author = await Author.findByPk(hidden_author_id)
-    console.log(`==================first variables ${title} ${copyright} ${totalpages} ${currentpage}`);
-    console.log(`=====================ID ${hidden_author_id}`);
-    console.log(`=====================AUTHOR ${author}`);
-    console.log(`===================url ${req.url}`);
-
+   
     try {
 
         if (title && copyright && totalpages && currentpage &&  hidden_author_id) {
@@ -88,9 +78,37 @@ const processBookForm = async (req, res) => {
     }
 }
 
+const deleteBook = async (req,res)=>{
+    
+    const {bookid} = req.params
 
+    try{
+
+        const numberOfBookToDelete = await Book.destroy({
+            where:{
+                id:bookid,
+            }
+        })
+        console.log(numberOfBookToDelete);
+
+        if(numberOfBookToDelete === 0 || numberOfBookToDelete >1){
+            throw Error(`Something has gone wrong`)
+        }
+
+        res.json({
+            status:`Success`,
+            bookid,
+        })
+    }catch(err){
+        res.json({
+            status:`Error`
+        })
+    }
+
+}
 
 module.exports = {
     renderBooksPage,
-    processBookForm
+    processBookForm,
+    deleteBook
 }
