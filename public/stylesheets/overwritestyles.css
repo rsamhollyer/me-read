@@ -1,3 +1,19 @@
 .nonunderline {
     text-decoration: none !important;
 }
+
+.dark-grey-background {
+    background-color: hsl(0, 0%, 20%);
+}
+
+.login-color {
+    color: #e50c9d;
+    ;
+}
+
+.card-background {
+    background-color: #222;
+    border: 1px solid #555;
+    padding: 1rem;
+
+}
