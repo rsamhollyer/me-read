@@ -23,9 +23,9 @@ const authorPage = async (req, res) => {
             authors = await Author.findAll({
                 where: {
                     UserId: id,
-                }
+                },
+                order:[["updatedAt", "DESC"]]
             })
-
         } catch (err) {
             console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
         }
@@ -39,6 +39,72 @@ const authorPage = async (req, res) => {
         })
     }
 }
+
+//This is to sort the authors page with a router and using the author's last name (authorlast)
+const descendingSort = async (req, res) => {
+    const {
+        firstname,
+        lastname,
+        id
+    } = req.session.user
+
+
+    if (id) {
+        let authors = []
+        try {
+
+            authors = await Author.findAll({
+                where: {
+                    UserId: id,
+                },
+                order:[["authorlast", "DESC"]]
+            })
+        } catch (err) {
+            console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
+        }
+
+        res.render("authors/allauthors", {
+            ...navLayout,
+            locals: {
+                title: `${firstname}'s Authors`,
+                authors,
+            }
+        })
+    }
+}
+//This is to sort the authors page with a router and using the author's last name (authorlast)
+const ascendingSort = async (req, res) => {
+    const {
+        firstname,
+        lastname,
+        id
+    } = req.session.user
+
+
+    if (id) {
+        let authors = []
+        try {
+
+            authors = await Author.findAll({
+                where: {
+                    UserId: id,
+                },
+                order:[["authorlast", "ASC"]]
+            })
+        } catch (err) {
+            console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
+        }
+
+        res.render("authors/allauthors", {
+            ...navLayout,
+            locals: {
+                title: `${firstname}'s Authors`,
+                authors,
+            }
+        })
+    }
+}
+
 
 
 const renderAuthorForm = (req, res) => {
@@ -133,7 +199,7 @@ const editAuthor = async (req, res) => {
             authorfirst,
             authorlast,
             UserId: id,
-            
+
             where: {
                 id: authorid,
                 UserId: id,
@@ -162,5 +228,7 @@ module.exports = {
     processNewAuthor,
     authorPage,
     deleteAuthor,
-    editAuthor
+    editAuthor,
+    descendingSort,
+    ascendingSort
 }
