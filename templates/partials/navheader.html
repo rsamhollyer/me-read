@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/e7f232e091.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="dark-grey-background text-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/user/home"><img class="d-inline-block align-center" width="75"  src="/images/book_logo.png" /></a>
@@ -22,15 +22,12 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                  
                     <li class="nav-item">
-                        <a class="nav-link" href="/author/main">Author Page</a>
+                        <a class="nav-link" href="/author/main">Authors</a>
                     </li>
     
     
                 </ul>
-                <form method="GET" action="/members-only/search" class="d-flex">
-                    <input name='term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="me-2 btn btn-outline-success" type="submit">Search</button>
-                </form>
+              
     
                 <form method="POST" action="/user/logout">
                     <input class="me-2 btn btn-outline-success" type="submit" value="Logout">

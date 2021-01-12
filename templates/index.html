@@ -1,17 +1,35 @@
 ${header}
+<div class="d-flex min-vh-100 align-items-center">
+<div class="mx-auto">
+    <div class=" justify-content-center align-items-center  d-flex contianer">
+        <h1 class="login-color">Me-Read</h1>
+    </div>
+    <div class="container d-flex justify-content-center">
+
+        <div class="card card-background" style="width: 18rem;">
+            <img src="/images/front_page_image.svg " class="card-img-top" alt="bookcase cartoon">
+
+            <div class="card-body">
+                <form action="user/login" method="POST">
+                    <div class="mb-3">
+                        <label class="text-white form-label" for="username">Username</label>
+                        <input class="form-control" required autofocus name="username" type="text" id="username">
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-white form-label" for="password">Password</label>
+                        <input class="form-control" required name="password" type="password" id="password">
+                    </div>
+                    <div class="container d-flex justify-content-end">
+                        <button class="me-auto btn btn-primary" type="submit">Login!</button>
+                        <a class="align-self-end" href="user/create">No Account?</a>
+                    </div>
+                </form>
 
 
-<form action="user/login" method="POST">
 
-<label for="username">Username</label>
-<input required autofocus name="username" type="text" id="username">
-
-<label for="password">Password</label>
-<input required name="password" type="password" id="password">
-
-<input type="submit" value="Login!">
-</form>
-
-<a href="user/create">No Account?</a>
-
+            </div>
+        </div>
+        
+    </div>
+</div>
 ${footer}

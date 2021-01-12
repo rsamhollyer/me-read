@@ -1,17 +1,16 @@
 ${header}
 
-<br>
 
 <div class="container">
 
-    <div class="container mt-1 mb-1 border border-4 border-dark">
+    <div class="container mt-2 mb-1 ">
         <div class="d-flex justify-content-between">
-            <h1>Me - Books</h1>
+            <h1>Books by ${author.authorfirst} ${author.authorlast}</h1>
 
             <!-- Button trigger modal -->
             <div class="button align-self-center">
                 <button type="button" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <i class="fas fa-plus-circle">ADD</i>
+                    <i class="fas fa-plus-circle"></i>Add Book
                 </button>
             </div>
         </div>
@@ -60,9 +59,9 @@ ${header}
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         ${books.length > 0 ? books.map(b=>`
-        <div class="col shadow-lg p-3 mb-5 bg-light rounded">
+        <div class="col shadow-lg p-3 mb-5">
             <div class="card h-100">
-                <div class="card">
+                <div class="card card-background">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h5 class="card-title"> ${b.title}

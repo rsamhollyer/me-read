@@ -1,19 +1,27 @@
 ${header}
 <div class="container">
 
-    <div class="container mt-1 mb-1 border border-4 border-dark">
+    <div class="container mt-2 mb-1">
         <div class="d-flex justify-content-between">
             <h1>Me - Authors</h1>
 
             <!-- Button trigger modal -->
             <div class="button align-self-center">
                 <button type="button" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <i class="fas fa-plus-circle">ADD</i>
+                    <i class="fas fa-plus-circle"></i> New Author
                 </button>
             </div>
         </div>
     </div>
-
+    <div class="container d-flex">
+        <div class="btn-group" role="group" aria-label="Sort Buttons">
+            <a href="/author/sort/main/az" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down"></i> Last Name</a>
+           
+            <a href="/author/sort/main/za" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down-alt"></i> Last Name</a>
+            
+            <a href="/author/main" data-sort class="btn btn-outline-primary" for="btnradio3"><i class="far fa-calendar"></i> Last Modified</a>
+        </div>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -47,9 +55,9 @@ ${header}
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         ${authors.length > 0 ? authors.map(auth=>`
-        <div class="col shadow-lg p-3 mb-5 bg-light rounded">
+        <div class="col shadow-lg p-3 mb-5">
             <div class="card h-100">
-                <div class="card">
+                <div class="card card-background">
 
 
                     <div class="card-body">
@@ -76,7 +84,8 @@ ${header}
                         </div>
                         <div class="border-bottom border-dark"></div>
                         <p class="card-text"></p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <p class="card-text"><small class="text-muted">Last updated
+                                ${auth.updatedAt.toLocaleDateString()}</small></p>
                     </div>
                 </div>
             </div>
@@ -144,4 +153,6 @@ ${header}
 </div>
 
 <script src="/scripts/deleteauthors.js"></script>
+<script src="/scripts/sortscript.js"></script>
+
 ${footer}
