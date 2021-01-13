@@ -15,13 +15,27 @@ ${header}
     </div>
 
     <!-- Sort Feature -->
-    <div class="container d-flex">
-        <div class="btn-group" role="group" aria-label="Sort Buttons">
-            <a href="/author/sort/main/az" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down"></i> Last Name</a>
-           
-            <a href="/author/sort/main/za" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down-alt"></i> Last Name</a>
-            
-            <a href="/author/sort/main/sorted" data-sort class="btn btn-outline-primary" for="btnradio3"><i class="far fa-calendar"></i> Last Modified</a>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="btn-group" role="group" aria-label="Sort Buttons">
+                    <a href="/author/sort/main/az" data-sort class="btn btn-outline-primary"><i
+                            class="fas fa-sort-alpha-down"></i> Last Name</a>
+
+                    <a href="/author/sort/main/za" data-sort class="btn btn-outline-primary"><i
+                            class="fas fa-sort-alpha-down-alt"></i> Last Name</a>
+
+                    <a href="/author/sort/main/sorted" data-sort class="btn btn-outline-primary" for="btnradio3"><i
+                            class="far fa-calendar"></i> Last Modified</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 pt-2 pt-md-0">
+                <form class="d-flex" method="GET" action="/author/search">
+                    <input name="term" class="form-control" type="search" placeholder="Search Authors"
+                        aria-label="Search Authors">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -54,7 +68,7 @@ ${header}
         </div>
     </div>
 
-<!-- Cards for each author -->
+    <!-- Cards for each author -->
     <div class="row row-cols-1 row-cols-md-3 g-4">
         ${authors.length > 0 ? authors.map(auth=>`
         <div class="col shadow-lg p-3 mb-5">
@@ -64,7 +78,8 @@ ${header}
 
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-title"><a class="nonunderline" href="/book/${auth.id}/sort/sorted">${auth.authorfirst}
+                            <h5 class="card-title"><a class="nonunderline"
+                                    href="/book/${auth.id}/sort/sorted">${auth.authorfirst}
                                     ${auth.authorlast}</a>
                             </h5>
                             <div class="dropdown">
@@ -73,9 +88,9 @@ ${header}
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                    <!-- <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
+                                    <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
                                             data-bs-target="#editForm" class="dropdown-item"><i
-                                                class="fas fa-edit"></i>Edit</span></li> -->
+                                                class="fas fa-edit"></i>Edit</span></li>
 
                                     <li class="bg-danger"><span data-author-id="${auth.id}" data-bs-toggle="modal"
                                             data-bs-target="#deleteCard" class="dropdown-item"><i
@@ -96,7 +111,8 @@ ${header}
 
 
     </div>
-    <!-- Modal for Edit
+   
+    Modal for Edit
     <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -105,7 +121,7 @@ ${header}
 
                     <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
 
-                    <form id="edit-author" method="PUT">
+                    <form action="/author/${author.id}" id="edit-author" method="PUT">
 
                         <label for="firstname"> First Name </label>
                         <input autofocus required id="firstname" name="authorfirst" type="text">
@@ -128,7 +144,7 @@ ${header}
                 </form>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- Modal for Delete -->
     <div class="modal fade" id="deleteCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

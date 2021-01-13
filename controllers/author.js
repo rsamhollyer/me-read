@@ -7,12 +7,15 @@ const {
     Author
 } = require("../models");
 
+const Sequelize = require("sequelize")
+const {
+    Op
+} = require("sequelize")
 
 const authorPage = async (req, res) => {
     const {
         sorted
     } = req.params
-    console.log(sorted);
 
     const {
         firstname,
@@ -171,7 +174,6 @@ const editAuthor = async (req, res) => {
 
         })
 
-        console.log(numberOfAuthorToEdit);
 
         if (numberOfAuthorToEdit === 0 || numberOfAuthorToEdit > 1) {
             throw Error(`Something has gone wrong`)
@@ -187,10 +189,46 @@ const editAuthor = async (req, res) => {
 
     }
 }
+
+const searchAuthors = async (req, res)=> {
+    const {
+        term
+    } = req.query
+
+
+    try {
+
+        if (term) {
+
+            const authors = await Author.findAll({
+               
+                where:
+                    Sequelize.where(Sequelize.fn("concat",Sequelize.col("authorfirst"), Sequelize.col("authorlast")),{
+                       [Op.like]: "%" + term + "%" 
+                    })
+                
+            })
+
+            res.render("searchresults/searchauthors", {
+                ...navLayout,
+                locals: {
+                    title: `Seach Results`,
+                    authors,
+                }
+            })
+        }
+
+    } catch (err) {
+        console.log(`AUTHOR SEARCH ERROR : ${err}`);
+        res.redirect("/user/home")
+    }
+}
+
 module.exports = {
     renderAuthorForm,
     processNewAuthor,
     authorPage,
     deleteAuthor,
     editAuthor,
+    searchAuthors
 }
