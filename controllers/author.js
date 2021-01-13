@@ -204,7 +204,7 @@ const searchAuthors = async (req, res)=> {
                
                 where:
                     Sequelize.where(Sequelize.fn("concat",Sequelize.col("authorfirst"), Sequelize.col("authorlast")),{
-                       [Op.like]: "%" + term + "%" 
+                       [Op.iLike]: "%" + term + "%" 
                     })
                 
             })

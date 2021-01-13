@@ -148,7 +148,7 @@ const searchBooks = async (req,res)=>{
             const books = await Book.findAll({
                 where:{
                     title:{
-                        [Op.like] :"%" + term + "%"
+                        [Op.iLike] :"%" + term + "%"
                     }
                 }
             })
