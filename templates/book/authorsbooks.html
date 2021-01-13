@@ -3,7 +3,7 @@ ${header}
 
 <div class="container">
 
-    <div class="container mt-2 mb-1 ">
+    <div class="container mt-2 mb-4">
         <div class="d-flex justify-content-between">
             <h1>Books by ${author.authorfirst} ${author.authorlast}</h1>
 
@@ -17,16 +17,33 @@ ${header}
     </div>
 
 
-<!-- Sort Feature -->
-<div class="container d-flex">
-    <div class="btn-group" role="group" aria-label="Sort Buttons">
-        <a href="/book/${author.id}/sort/az" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down"></i> Title</a>
-       
-        <a href="/book/${author.id}/sort/za" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down-alt"></i> Title</a>
-        
-        <a href="/book/${author.id}/sort/sorted" data-sort class="btn btn-outline-primary" for="btnradio3"><i class="far fa-calendar"></i> Last Modified</a>
+    <!-- Sort Feature -->
+    <div class="container mb-4">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+
+                <div class="btn-group" role="group" aria-label="Sort Buttons">
+                    <a href="/book/${author.id}/sort/az" data-sort class="btn btn-outline-primary"><i
+                            class="fas fa-sort-alpha-down"></i> Title</a>
+
+                    <a href="/book/${author.id}/sort/za" data-sort class="btn btn-outline-primary"><i
+                            class="fas fa-sort-alpha-down-alt"></i> Title</a>
+
+                    <a href="/book/${author.id}/sort/sorted" data-sort class="btn btn-outline-primary"
+                        for="btnradio3"><i class="far fa-calendar"></i> Last Modified</a>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 pt-2 pt-md-0">
+                <form class="d-flex" method="GET" action="/book/search">
+                    <input name="term" class="form-control" type="search" placeholder="Search Books"
+                    aria-label="Search Books">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
 
 
     <!-- Modal -->
@@ -39,7 +56,9 @@ ${header}
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="add-new-book" action="add" method="POST">
+
+                    <!-- Add Book Form -->
+                    <form id="add-new-book" action="/book/add" method="POST">
 
 
                         <label for="title">Title</label>
@@ -85,17 +104,18 @@ ${header}
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                    <li><span data-book-id="${b.id}" data-bs-toggle="modal" data-bs-target="#editForm"
-                                            class="dropdown-item"><i class="fas fa-edit"></i>Edit</span></li>
+                                    <!-- <li><span data-book-id="${b.id}" data-bs-toggle="modal" data-bs-target="#editForm"
+                                            class="dropdown-item"><i class="fas fa-edit"></i>Edit</span></li> -->
 
-                                    <li><span data-book-id="${b.id}" data-bs-toggle="modal" data-bs-target="#deleteCard"
-                                            class="dropdown-item"><i class="fas fa-trash-alt"></i> Delete</span></li>
+                                    <li class="bg-danger"><span data-book-id="${b.id}" data-bs-toggle="modal"
+                                            data-bs-target="#deleteCard" class="dropdown-item"><i
+                                                class="fas fa-trash-alt"></i> Delete</span></li>
                                 </ul>
 
                             </div>
                         </div>
                         <p class="card-text">&copy ${b.copyright}</p>
-                        <p class="card-text">Total page count :  ${b.totalpages}</p>
+                        <p class="card-text">Total page count : ${b.totalpages}</p>
                         <p class="card-text">Page I'm on : ${b.currentpage}</p>
                         <p class="card-text"><small class="text-muted">${b.updatedAt.toLocaleDateString()}</small></p>
                     </div>
@@ -106,7 +126,7 @@ ${header}
 
     </div>
     <!-- Modal for Edit -->
-    <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -114,7 +134,7 @@ ${header}
 
                     <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
 
-                    <form id="add-new-book" action="add" method="POST">
+                    <form id="add-new-book" action="/book/add" method="POST">
 
 
                         <label for="title">Title</label>
@@ -147,7 +167,7 @@ ${header}
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Modal for Delete -->
     <div class="modal fade" id="deleteCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

@@ -99,7 +99,7 @@ const processNewAuthor = async (req, res) => {
                 UserId: id
             })
             console.log(`==========================NEW Author ITEM`, newAuthor);
-            res.redirect(`/author/main`)
+            res.redirect(`/author/sort/main/sorted`)
         } else {
             res.redirect(req.url)
         }

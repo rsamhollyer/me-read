@@ -1,5 +1,4 @@
 let currentPathname = window.location.pathname
-console.log (currentPathname);
 let sortButtons = document.querySelectorAll("[data-sort]")
 
 sortButtons.forEach(button =>{
