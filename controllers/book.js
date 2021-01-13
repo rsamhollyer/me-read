@@ -8,6 +8,8 @@ const {
     Author
 } = require("../models")
 
+const {Op} =require("sequelize")
+
 const renderBooksPage = async (req, res) => {
     const {
         authorid,
@@ -79,11 +81,12 @@ const processBookForm = async (req, res) => {
 
     
 
-    // const author = await Author.findByPk(hidden_author_id)
+    const author = await Author.findByPk(hidden_author_id)
    
     try {
 
-        if (title && copyright && totalpages && currentpage &&  hidden_author_id) {
+        if (title && copyright && totalpages && currentpage && hidden_author_id) {
+
             const newBook = await Book.create({
                 title,
                 copyright,
@@ -91,8 +94,9 @@ const processBookForm = async (req, res) => {
                 currentpage,
                 AuthorId:  hidden_author_id,
             })
+
             console.log(`NEW BOOK ADDED ====================== : ${newBook}`);
-            res.redirect(`${req.baseUrl}/${hidden_author_id}`)
+            res.redirect(`${req.baseUrl}/${hidden_author_id}/sort/sorted`)
         } else {
             console.log(`ERROR IN ELSE===================`);
             res.redirect("/user/home")
@@ -133,8 +137,41 @@ const deleteBook = async (req,res)=>{
 
 }
 
+const searchBooks = async (req,res)=>{
+
+    const {term} = req.query
+
+    try{
+
+        if(term){
+
+            const books = await Book.findAll({
+                where:{
+                    title:{
+                        [Op.like] :"%" + term + "%"
+                    }
+                }
+            })
+
+            res.render("searchresults/searchbooks",{
+                ...navLayout,
+                locals:{
+                    title:`Seach Results`,
+                    books,
+                }
+            })
+        }
+
+    } catch(err){
+        console.log(`BOOK SEARCH ERROR : ${err}`);
+        res.redirect("/user/home")
+    }
+}
+
+
 module.exports = {
     renderBooksPage,
     processBookForm,
-    deleteBook
+    deleteBook,
+    searchBooks
 }
