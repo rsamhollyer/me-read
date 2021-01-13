@@ -10,38 +10,10 @@ const {
 
 const authorPage = async (req, res) => {
     const {
-        firstname,
-        lastname,
-        id
-    } = req.session.user
+        sorted
+    } = req.params
+    console.log(sorted);
 
-
-    if (id) {
-        let authors = []
-        try {
-
-            authors = await Author.findAll({
-                where: {
-                    UserId: id,
-                },
-                order:[["updatedAt", "DESC"]]
-            })
-        } catch (err) {
-            console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
-        }
-
-        res.render("authors/allauthors", {
-            ...navLayout,
-            locals: {
-                title: `${firstname}'s Authors`,
-                authors,
-            }
-        })
-    }
-}
-
-//This is to sort the authors page with a router and using the author's last name (authorlast)
-const descendingSort = async (req, res) => {
     const {
         firstname,
         lastname,
@@ -52,13 +24,36 @@ const descendingSort = async (req, res) => {
     if (id) {
         let authors = []
         try {
+            if (sorted === "za") {
+                authors = await Author.findAll({
+                    where: {
+                        UserId: id,
+                    },
+                    order: [
+                        ["authorlast", "ASC"]
+                    ]
+                })
 
-            authors = await Author.findAll({
-                where: {
-                    UserId: id,
-                },
-                order:[["authorlast", "DESC"]]
-            })
+            } else if (sorted === "az") {
+                authors = await Author.findAll({
+                    where: {
+                        UserId: id,
+                    },
+                    order: [
+                        ["authorlast", "DESC"]
+                    ]
+                })
+            } else {
+                authors = await Author.findAll({
+                    where: {
+                        UserId: id,
+                    },
+                    order: [
+                        ["updatedAt", "DESC"]
+                    ]
+                })
+            }
+
         } catch (err) {
             console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
         }
@@ -72,38 +67,8 @@ const descendingSort = async (req, res) => {
         })
     }
 }
-//This is to sort the authors page with a router and using the author's last name (authorlast)
-const ascendingSort = async (req, res) => {
-    const {
-        firstname,
-        lastname,
-        id
-    } = req.session.user
 
 
-    if (id) {
-        let authors = []
-        try {
-
-            authors = await Author.findAll({
-                where: {
-                    UserId: id,
-                },
-                order:[["authorlast", "ASC"]]
-            })
-        } catch (err) {
-            console.log(`THIS IS AN ERROR INSIDE userHomePage================== : ${err}`);
-        }
-
-        res.render("authors/allauthors", {
-            ...navLayout,
-            locals: {
-                title: `${firstname}'s Authors`,
-                authors,
-            }
-        })
-    }
-}
 
 
 
@@ -117,7 +82,6 @@ const renderAuthorForm = (req, res) => {
 }
 
 const processNewAuthor = async (req, res) => {
-    console.log(req.body);
 
     const {
         authorfirst,
@@ -229,6 +193,5 @@ module.exports = {
     authorPage,
     deleteAuthor,
     editAuthor,
-    descendingSort,
-    ascendingSort
+
 }
