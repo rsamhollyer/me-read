@@ -13,6 +13,8 @@ ${header}
             </div>
         </div>
     </div>
+
+    <!-- Sort Feature -->
     <div class="container d-flex">
         <div class="btn-group" role="group" aria-label="Sort Buttons">
             <a href="/author/sort/main/az" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down"></i> Last Name</a>
@@ -52,7 +54,7 @@ ${header}
         </div>
     </div>
 
-
+<!-- Cards for each author -->
     <div class="row row-cols-1 row-cols-md-3 g-4">
         ${authors.length > 0 ? authors.map(auth=>`
         <div class="col shadow-lg p-3 mb-5">
@@ -62,7 +64,7 @@ ${header}
 
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-title"><a class="nonunderline" href="/book/${auth.id}">${auth.authorfirst}
+                            <h5 class="card-title"><a class="nonunderline" href="/book/${auth.id}/sort/sorted">${auth.authorfirst}
                                     ${auth.authorlast}</a>
                             </h5>
                             <div class="dropdown">

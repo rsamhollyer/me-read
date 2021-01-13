@@ -193,5 +193,4 @@ module.exports = {
     authorPage,
     deleteAuthor,
     editAuthor,
-
 }

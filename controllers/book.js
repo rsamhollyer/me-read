@@ -10,7 +10,8 @@ const {
 
 const renderBooksPage = async (req, res) => {
     const {
-        authorid
+        authorid,
+        sorted
     } = req.params
 
     try {
@@ -18,11 +19,36 @@ const renderBooksPage = async (req, res) => {
         if (authorid) {
 
             const author = await Author.findByPk(authorid)
-            books = await Book.findAll({
-                where: {
-                    AuthorId: authorid,
-                }
-            })
+            if(sorted === "az"){
+                books = await Book.findAll({
+                    where:{
+                        AuthorId:authorid,
+                    },
+                    order:[
+                        ["title","DESC"]
+                    ]
+                })
+            } else if(sorted==="za"){
+                books = await Book.findAll({
+                    where:{
+                        AuthorId:authorid,
+                    },
+                    order:[
+                        ["title","ASC"]
+                    ]
+                })
+            } else {
+
+                books = await Book.findAll({
+                    where: {
+                        AuthorId: authorid,
+                    },
+                    order:[
+                       [ "updatedAt","DESC"]
+                    ]
+                })
+            }
+
 
             res.render("book/authorsbooks", {
                 ...navLayout,

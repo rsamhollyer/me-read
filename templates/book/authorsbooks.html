@@ -17,6 +17,18 @@ ${header}
     </div>
 
 
+<!-- Sort Feature -->
+<div class="container d-flex">
+    <div class="btn-group" role="group" aria-label="Sort Buttons">
+        <a href="/book/${author.id}/sort/az" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down"></i> Title</a>
+       
+        <a href="/book/${author.id}/sort/za" data-sort class="btn btn-outline-primary"><i class="fas fa-sort-alpha-down-alt"></i> Title</a>
+        
+        <a href="/book/${author.id}/sort/sorted" data-sort class="btn btn-outline-primary" for="btnradio3"><i class="far fa-calendar"></i> Last Modified</a>
+    </div>
+</div>
+
+
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -82,8 +94,10 @@ ${header}
 
                             </div>
                         </div>
-                        <p class="card-text"></p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <p class="card-text">&copy ${b.copyright}</p>
+                        <p class="card-text">Total page count :  ${b.totalpages}</p>
+                        <p class="card-text">Page I'm on : ${b.currentpage}</p>
+                        <p class="card-text"><small class="text-muted">${b.updatedAt.toLocaleDateString()}</small></p>
                     </div>
                 </div>
             </div>
@@ -160,7 +174,7 @@ ${header}
 
 <script src="/scripts/grabbookurl.js"></script>
 <script src="/scripts/deletebook.js"></script>
-
+<script src="/scripts/sortscript.js"></script>
 
 
 ${footer}
