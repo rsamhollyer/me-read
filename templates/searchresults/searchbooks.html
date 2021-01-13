@@ -1,0 +1,67 @@
+${header}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    ${books.length > 0 ? books.map(b=>`
+    <div class="col shadow-lg p-3 mb-5">
+        <div class="card h-100">
+            <div class="card card-background">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title"> ${b.title}
+                        </h5>
+
+                        <div class="dropdown">
+                            <i type="button" class="fas fa-ellipsis-v" data-bs-toggle="dropdown"
+                                aria-expanded="false"></i>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                <!-- <li><span data-book-id="${b.id}" data-bs-toggle="modal" data-bs-target="#editForm"
+                                        class="dropdown-item"><i class="fas fa-edit"></i>Edit</span></li> -->
+
+                                <li class="bg-danger"><span data-book-id="${b.id}" data-bs-toggle="modal"
+                                        data-bs-target="#deleteCard" class="dropdown-item"><i
+                                            class="fas fa-trash-alt"></i> Delete</span></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <p class="card-text">&copy ${b.copyright}</p>
+                    <p class="card-text">Total page count : ${b.totalpages}</p>
+                    <p class="card-text">Page I'm on : ${b.currentpage}</p>
+                    <p class="card-text"><small class="text-muted">${b.updatedAt.toLocaleDateString()}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    `).join("") :`<h2>No Books Found!</h2>` }
+
+
+
+    <!-- Modal for Delete -->
+    <div class="modal fade" id="deleteCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Book?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button data-bs-dismiss="modal" data-delete-book type="button"
+                        class="bg-danger btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script src="/scripts/grabbookurl.js"></script> -->
+<script src="/scripts/deletebook.js"></script>
+<!-- <script src="/scripts/sortscript.js"></script> -->
+
+${footer}
