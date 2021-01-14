@@ -90,9 +90,9 @@ ${header}
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                    <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
+                                    <!-- <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
                                             data-bs-target="#editForm" class="dropdown-item"><i
-                                                class="fas fa-edit"></i>Edit</span></li>
+                                                class="fas fa-edit"></i>Edit</span></li> -->
 
                                     <li class="bg-danger"><span data-author-id="${auth.id}" data-bs-toggle="modal"
                                             data-bs-target="#deleteCard" class="dropdown-item"><i
@@ -112,7 +112,7 @@ ${header}
         <!-- Modal for Edit -->
 
 
-        <form action="/author/edit/${auth.id}" id="edit-author" method="POST" class="editAuthor hide-this">
+        <!-- <form action="/author/edit/${auth.id}" id="edit-author" method="POST" class="editAuthor hide-this">
 
             <label for="firstname"> First Name </label>
             <input autofocus required id="firstname" name="authorfirst" type="text"
@@ -124,7 +124,7 @@ ${header}
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button data-bs-dismiss="modal" type="submit" data-edit-author
                 class="btn btn-primary">Understood</button>
-        </form>
+        </form> -->
 
         <!-- <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -187,6 +187,6 @@ ${header}
 
 <script src="/scripts/deleteauthors.js"></script>
 <script src="/scripts/sortscript.js"></script>
-<script src="/scripts/editauthors.js"></script>
+<!-- <script src="/scripts/editauthors.js"></script> -->
 
 ${footer}
