@@ -1,8 +1,8 @@
-const authorIdVary = document.querySelectorAll("[data-author-id]")
+const authorIdToDelete = document.querySelectorAll("[data-author-id]")
 const deleteButton = document.querySelector("[data-delete-author]")
 let deleteRequest;
 
-const handleClick = (e) => {
+const handleDeleteClick = (e) => {
     const authorId = e.target
     const targetAuthor = authorId.getAttribute("data-author-id")
 
@@ -25,8 +25,8 @@ const handleClick = (e) => {
 }
 
 
-authorIdVary.forEach(id => {
-    id.addEventListener("click", handleClick)
+authorIdToDelete.forEach(id => {
+    id.addEventListener("click", handleDeleteClick)
 })
 
 deleteButton.addEventListener("click", () => {

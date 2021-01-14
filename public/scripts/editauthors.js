@@ -1,36 +1,47 @@
 const authorIdVary = document.querySelectorAll("[data-author-id]")
 const editButton = document.querySelector("[data-edit-author]")
 
-let editRequest;
+let editAuthor = document.querySelector("#edit-author")
 
-const handleClick = (e) => {
-    const authorId = e.target
-    const targetAuthor = authorId.getAttribute("data-author-id")
+const handleEditClick = () => {
+    // const authorId = e.target
+    // const targetAuthor = authorId.getAttribute("data-author-id")
+    editAuthor.classList.toggle('hide-this')
 
-    const url = `/author/${targetAuthor}`;
+    // const url = `/author/edit/${targetAuthor}`;
+    // console.log(url);
 
-    editRequest = () => {
-        fetch(url, {
-                method: `PUT`,
-                body:JSON.stringify(data)
-            })
-            .then(result => result.json())
-            .then(data => {
+    // editRequest = (data) => {
+    //     fetch(url, {
+    //             method: `POST`,
+    //             body: data,
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         })
+    //         .then(result => {
+    //             console.log(result);
+    //             return result.json()
+    //         })
+    //         .then(data => {
+    //             console.log(data);
+    //             // location.reload();
+    //             return data
+    //         })
+    //         .catch(err => {
+    //             console.log(`You got an error :${err}`);
+    //         })
 
-                location.reload(); 
-            })
-            .catch(err => {
-                console.log(`You got an error :${err}`);
-            })
-
-    }
+    // }
 }
 
 
 authorIdVary.forEach(id => {
-    id.addEventListener("click", handleClick)
+    id.addEventListener("click", handleEditClick)
+    editAuthor.classList.toggle('hide-this')
 })
 
-editButton.addEventListener("click", () => {
-    editRequest()
+editButton.addEventListener("click", (data) => {
+    console.log(data);
+    // editRequest(data)
 })

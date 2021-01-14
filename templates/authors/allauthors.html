@@ -43,19 +43,21 @@ ${header}
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content card-background">
+                <img src="/images/front_page_image.svg " class="card-img-top" alt="bookcase cartoon">
+                <div class="modal-header mb-3">
                     <h5 class="modal-title" id="staticBackdropLabel">Add a New Author</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                 </div>
                 <div class="modal-body">
+                    <!-- Add Author Form -->
                     <form id="add-new-author" action="/author/add" method="POST">
 
-                        <label for="firstname"> First Name </label>
-                        <input autofocus required id="firstname" name="authorfirst" type="text">
+                        <label class="form-label" for="firstname"> First Name </label>
+                        <input autofocus required class="form-control" id="firstname" name="authorfirst" type="text">
 
-                        <label for="lastname"> Last Name </label>
-                        <input required id="lastname" name="authorlast" type="text">
+                        <label class="form-label"" for=" lastname"> Last Name </label>
+                        <input required class="form-control" id="lastname" name="authorlast" type="text">
 
 
                 </div>
@@ -107,44 +109,57 @@ ${header}
                 </div>
             </div>
         </div>
-        `).join("") :`<h2>No Authors Yet!</h2>` }
+        <!-- Modal for Edit -->
+
+
+        <form action="/author/edit/${auth.id}" id="edit-author" method="POST" class="editAuthor hide-this">
+
+            <label for="firstname"> First Name </label>
+            <input autofocus required id="firstname" name="authorfirst" type="text"
+                value="${auth.authorfirst}">
+
+            <label for="lastname"> Last Name </label>
+            <input required id="lastname" name="authorlast" type="text" value="${auth.authorlast}">
+
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button data-bs-dismiss="modal" type="submit" data-edit-author
+                class="btn btn-primary">Understood</button>
+        </form>
+
+        <!-- <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/author/edit/${auth.id}" id="edit-author" method="POST">
+
+                            <label for="firstname"> First Name </label>
+                            <input autofocus required id="firstname" name="authorfirst" type="text"
+                                value="${auth.authorfirst}">
+
+                            <label for="lastname"> Last Name </label>
+                            <input required id="lastname" name="authorlast" type="text" value="${auth.authorlast}">
+
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button data-bs-dismiss="modal" type="submit" data-edit-author
+                                class="btn btn-primary">Understood</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        `).join("") :`<div class="container">
+            <h2>No Authors Yet!</h2>
+        </div>` }
 
 
     </div>
-   
-    <!-- Modal for Edit
-    <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
-
-                    <form action="/author/ id="edit-author" method="PUT">
-
-                        <label for="firstname"> First Name </label>
-                        <input autofocus required id="firstname" name="authorfirst" type="text">
-
-                        <label for="lastname"> Last Name </label>
-                        <input required id="lastname" name="authorlast" type="text">
 
 
-                        <button id="edit-author" type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button data-bs-dismiss="modal" type="submit" data-edit-author
-                        class="btn btn-primary">Understood</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div> -->
 
     <!-- Modal for Delete -->
     <div class="modal fade" id="deleteCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -172,5 +187,6 @@ ${header}
 
 <script src="/scripts/deleteauthors.js"></script>
 <script src="/scripts/sortscript.js"></script>
+<script src="/scripts/editauthors.js"></script>
 
 ${footer}

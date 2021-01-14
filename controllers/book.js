@@ -8,7 +8,9 @@ const {
     Author
 } = require("../models")
 
-const {Op} =require("sequelize")
+const {
+    Op
+} = require("sequelize")
 
 const renderBooksPage = async (req, res) => {
     const {
@@ -16,27 +18,36 @@ const renderBooksPage = async (req, res) => {
         sorted
     } = req.params
 
+    let contents = () => {
+        let selectOptionsContent = []
+        for (let i = 1900; i <= 2020; i++) {
+            selectOptionsContent.push(`<option value=${i}>${i}</option>`)
+        }
+        return selectOptionsContent
+    }
+
+    let contentsArray = contents()
     try {
         let books = []
         if (authorid) {
 
             const author = await Author.findByPk(authorid)
-            if(sorted === "az"){
+            if (sorted === "az") {
                 books = await Book.findAll({
-                    where:{
-                        AuthorId:authorid,
+                    where: {
+                        AuthorId: authorid,
                     },
-                    order:[
-                        ["title","DESC"]
+                    order: [
+                        ["title", "DESC"]
                     ]
                 })
-            } else if(sorted==="za"){
+            } else if (sorted === "za") {
                 books = await Book.findAll({
-                    where:{
-                        AuthorId:authorid,
+                    where: {
+                        AuthorId: authorid,
                     },
-                    order:[
-                        ["title","ASC"]
+                    order: [
+                        ["title", "ASC"]
                     ]
                 })
             } else {
@@ -45,8 +56,8 @@ const renderBooksPage = async (req, res) => {
                     where: {
                         AuthorId: authorid,
                     },
-                    order:[
-                       [ "updatedAt","DESC"]
+                    order: [
+                        ["updatedAt", "DESC"]
                     ]
                 })
             }
@@ -58,6 +69,7 @@ const renderBooksPage = async (req, res) => {
                     title: `${author.authorfirst} ${author.authorlast}`,
                     books,
                     author,
+                    contents:contentsArray,
                 }
             })
         }
@@ -79,10 +91,10 @@ const processBookForm = async (req, res) => {
         hidden_author_id
     } = req.body
 
-    
+
 
     const author = await Author.findByPk(hidden_author_id)
-   
+
     try {
 
         if (title && copyright && totalpages && currentpage && hidden_author_id) {
@@ -92,7 +104,7 @@ const processBookForm = async (req, res) => {
                 copyright,
                 totalpages,
                 currentpage,
-                AuthorId:  hidden_author_id,
+                AuthorId: hidden_author_id,
             })
 
             console.log(`NEW BOOK ADDED ====================== : ${newBook}`);
@@ -108,61 +120,65 @@ const processBookForm = async (req, res) => {
     }
 }
 
-const deleteBook = async (req,res)=>{
-    
-    const {bookid} = req.params
+const deleteBook = async (req, res) => {
 
-    try{
+    const {
+        bookid
+    } = req.params
+
+    try {
 
         const numberOfBookToDelete = await Book.destroy({
-            where:{
-                id:bookid,
+            where: {
+                id: bookid,
             }
         })
         console.log(numberOfBookToDelete);
 
-        if(numberOfBookToDelete === 0 || numberOfBookToDelete >1){
+        if (numberOfBookToDelete === 0 || numberOfBookToDelete > 1) {
             throw Error(`Something has gone wrong`)
         }
 
         res.json({
-            status:`Success`,
+            status: `Success`,
             bookid,
         })
-    }catch(err){
+    } catch (err) {
         res.json({
-            status:`Error`
+            status: `Error`
         })
     }
 
 }
 
-const searchBooks = async (req,res)=>{
+const searchBooks = async (req, res) => {
 
-    const {term} = req.query
+    const {
+        term
+    } = req.query
 
-    try{
+    try {
 
-        if(term){
+        if (term) {
 
             const books = await Book.findAll({
-                where:{
-                    title:{
-                        [Op.iLike] :"%" + term + "%"
+                where: {
+                    title: {
+                        [Op.iLike]: "%" + term + "%"
                     }
                 }
             })
 
-            res.render("searchresults/searchbooks",{
+            res.render("searchresults/searchbooks", {
                 ...navLayout,
-                locals:{
-                    title:`Seach Results`,
+                locals: {
+                    title: `Seach Results`,
                     books,
                 }
             })
         }
 
-    } catch(err){
+    } catch (err) {
         console.log(`BOOK SEARCH ERROR : ${err}`);
         res.redirect("/user/home")
     }

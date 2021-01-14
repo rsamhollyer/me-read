@@ -146,51 +146,65 @@ const deleteAuthor = async (req, res) => {
 }
 
 const editAuthor = async (req, res) => {
+    console.log(`INSIDE EDIT AUTHOR`);
 
     const {
         authorid
     } = req.params
 
-    const {
-        id
-    } = req.session.user
+    console.log(`AUTHORID : ${authorid}`);
 
-    const {
+    let {
         authorfirst,
         authorlast
     } = req.body
 
+    console.log(`REQ.BODY`, req.body);
+    console.log(`AUTHOR FIRST`, authorfirst);
+    console.log(`AUTHOR LAST`, authorlast);
+
     try {
 
-        const numberOfAuthorToEdit = await Author.update({
-            authorfirst,
-            authorlast,
-            UserId: id,
-
+        const findAuthor = await Author.findOne({
             where: {
                 id: authorid,
-                UserId: id,
+                UserId: req.session.user.id
             }
-
         })
 
+        console.log(`FIND AUTHOR ID`, findAuthor.id);
+        console.log(`FIND AUTHOR : ${findAuthor.authorfirst}`);
 
-        if (numberOfAuthorToEdit === 0 || numberOfAuthorToEdit > 1) {
-            throw Error(`Something has gone wrong`)
-        }
-        res.json({
-            status: `Success`,
-            authorid
-        })
+        // const numberOfAuthorToEdit = await Author.update({
+        //     authorfirst,
+        //     authorlast,
+        //     UserId: id,
+
+        //     where: {
+        //         id: findAuthor.id,
+        //         UserId: id,
+        //     }
+
+        // })
+        findAuthor.authorfirst = authorfirst
+        findAuthor.authorlast = authorlast
+
+        console.log(`AUTHOR FIRST`, authorfirst);
+        console.log(`AUTHOR LAST`, authorlast);
+        await findAuthor.save()
+
+        // if (numberOfAuthorToEdit === 0 || numberOfAuthorToEdit > 1) {
+        //     throw Error(`Something has gone wrong`)
+        // }
+        res.redirect(`${req.baseUrl}/sort/main/sorted`)
     } catch (err) {
-        res.json({
-            status: `Error`
-        })
+        console.log(`ERROR IN EDIT ${err}`);
+        res.redirect(`${req.baseUrl}/sort/main/sorted`)
 
     }
 }
 
-const searchAuthors = async (req, res)=> {
+const searchAuthors = async (req, res) => {
     const {
         term
     } = req.query
@@ -201,12 +215,11 @@ const searchAuthors = async (req, res)=> {
         if (term) {
 
             const authors = await Author.findAll({
-               
-                where:
-                    Sequelize.where(Sequelize.fn("concat",Sequelize.col("authorfirst"), Sequelize.col("authorlast")),{
-                       [Op.iLike]: "%" + term + "%" 
-                    })
-                
+
+                where: Sequelize.where(Sequelize.fn("concat", Sequelize.col("authorfirst"), Sequelize.col("authorlast")), {
+                    [Op.iLike]: "%" + term + "%"
+                })
+
             })
 
             res.render("searchresults/searchauthors", {
