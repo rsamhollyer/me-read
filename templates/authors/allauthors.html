@@ -90,9 +90,9 @@ ${header}
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                    <!-- <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
+                                    <li><span data-author-id="${auth.id}" data-bs-toggle="modal"
                                             data-bs-target="#editForm" class="dropdown-item"><i
-                                                class="fas fa-edit"></i>Edit</span></li> -->
+                                                class="fas fa-edit"></i>Edit</span></li>
 
                                     <li class="bg-danger"><span data-author-id="${auth.id}" data-bs-toggle="modal"
                                             data-bs-target="#deleteCard" class="dropdown-item"><i
@@ -110,47 +110,33 @@ ${header}
             </div>
         </div>
         <!-- Modal for Edit -->
-
-
-        <!-- <form action="/author/edit/${auth.id}" id="edit-author" method="POST" class="editAuthor hide-this">
-
-            <label for="firstname"> First Name </label>
-            <input autofocus required id="firstname" name="authorfirst" type="text"
-                value="${auth.authorfirst}">
-
-            <label for="lastname"> Last Name </label>
-            <input required id="lastname" name="authorlast" type="text" value="${auth.authorlast}">
-
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button data-bs-dismiss="modal" type="submit" data-edit-author
-                class="btn btn-primary">Understood</button>
-        </form> -->
-
-        <!-- <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       
+        <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content card-background">
+                    <img src="/images/front_page_image.svg " class="card-img-top" alt="bookcase cartoon">
+                    <div class="modal-header mb-3">
                         <h5 class="modal-title" id="staticBackdropLabel">Edit Author</h5>
                     </div>
                     <div class="modal-body">
                         <form action="/author/edit/${auth.id}" id="edit-author" method="POST">
 
-                            <label for="firstname"> First Name </label>
-                            <input autofocus required id="firstname" name="authorfirst" type="text"
+                            <label class="form-label" for="firstname"> First Name </label>
+                            <input autofocus required class="form-control" id="firstname" name="authorfirst" type="text"
                                 value="${auth.authorfirst}">
 
-                            <label for="lastname"> Last Name </label>
-                            <input required id="lastname" name="authorlast" type="text" value="${auth.authorlast}">
+                            <label class="form-label" for="lastname"> Last Name </label>
+                            <input required class="form-control" id="lastname" name="authorlast" type="text" value="${auth.authorlast}">
 
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button data-bs-dismiss="modal" type="submit" data-edit-author
+                            <button  type="submit" data-edit-author
                                 class="btn btn-primary">Understood</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         `).join("") :`<div class="container">
             <h2>No Authors Yet!</h2>
@@ -187,6 +173,5 @@ ${header}
 
 <script src="/scripts/deleteauthors.js"></script>
 <script src="/scripts/sortscript.js"></script>
-<!-- <script src="/scripts/editauthors.js"></script> -->
 
 ${footer}

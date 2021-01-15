@@ -9,7 +9,7 @@ router.get("/sort/main/:sorted", authorControllers.authorPage)
       .get("/add", authorControllers.renderAuthorForm)
       .post("/add", authorControllers.processNewAuthor)
       .delete("/:authorid", authorControllers.deleteAuthor)
-      // .post("/edit/:authorid", authorControllers.editAuthor)
+      .post("/edit/:authorid", authorControllers.editAuthor)
       .get("/search", authorControllers.searchAuthors)
 
 
