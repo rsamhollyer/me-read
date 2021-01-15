@@ -146,22 +146,18 @@ const deleteAuthor = async (req, res) => {
 }
 
 const editAuthor = async (req, res) => {
-    console.log(`INSIDE EDIT AUTHOR`);
 
     const {
         authorid
     } = req.params
 
-    console.log(`AUTHORID : ${authorid}`);
 
     let {
         authorfirst,
         authorlast
     } = req.body
 
-    console.log(`REQ.BODY`, req.body);
-    console.log(`AUTHOR FIRST`, authorfirst);
-    console.log(`AUTHOR LAST`, authorlast);
+ 
 
     try {
 
@@ -172,30 +168,13 @@ const editAuthor = async (req, res) => {
             }
         })
 
-        console.log(`FIND AUTHOR ID`, findAuthor.id);
-        console.log(`FIND AUTHOR : ${findAuthor.authorfirst}`);
-
-        // const numberOfAuthorToEdit = await Author.update({
-        //     authorfirst,
-        //     authorlast,
-        //     UserId: id,
-
-        //     where: {
-        //         id: findAuthor.id,
-        //         UserId: id,
-        //     }
-
-        // })
+             
         findAuthor.authorfirst = authorfirst
         findAuthor.authorlast = authorlast
 
-        console.log(`AUTHOR FIRST`, authorfirst);
-        console.log(`AUTHOR LAST`, authorlast);
         await findAuthor.save()
 
-        // if (numberOfAuthorToEdit === 0 || numberOfAuthorToEdit > 1) {
-        //     throw Error(`Something has gone wrong`)
-        // }
+      
         res.redirect(`${req.baseUrl}/sort/main/sorted`)
     } catch (err) {
         console.log(`ERROR IN EDIT ${err}`);
