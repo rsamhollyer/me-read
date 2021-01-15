@@ -18,6 +18,7 @@ const renderBooksPage = async (req, res) => {
         sorted
     } = req.params
 
+    //This is to load the select option with years
     let contents = () => {
         let selectOptionsContent = []
         for (let i = 1900; i <= 2020; i++) {
@@ -32,6 +33,7 @@ const renderBooksPage = async (req, res) => {
         if (authorid) {
 
             const author = await Author.findByPk(authorid)
+            
             if (sorted === "az") {
                 books = await Book.findAll({
                     where: {
