@@ -21,7 +21,7 @@ const renderBooksPage = async (req, res) => {
     //This is to load the select option with years
     let contents = () => {
         let selectOptionsContent = []
-        for (let i = 1900; i <= 2020; i++) {
+        for (let i = 1800; i <= 2020; i++) {
             selectOptionsContent.push(`<option value=${i}>${i}</option>`)
         }
         return selectOptionsContent
